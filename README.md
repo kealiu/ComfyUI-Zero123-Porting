@@ -12,6 +12,8 @@ This porting enable you generate 3D rotated image in ComfyUI.
 
 After install this node, download the [sample workflow](sample/simple_workflow.json) to start trying.
 
+If you have any questions or suggestions, please don't hesitate to leave them in the [issue tracker](https://github.com/kealiu/ComfyUI-Zero123-Porting/issues).
+
 ## PREREQUISITES
 
 - INPUT `image` must `square` (width=height), otherwise, this node will automatically trans it forcely

@@ -12,6 +12,8 @@
 
 安装此节点后，下载 样例工作流 [sample workflow](sample/simple_workflow.json) 开始使用。
 
+有任何问题或者建议，欢迎在[issue](https://github.com/kealiu/ComfyUI-Zero123-Porting/issues)中反馈。
+
 ## 前提条件
 
 - 输入图像 `image` 必须是 `正方形` (宽=高)，否则将强制自动转换
