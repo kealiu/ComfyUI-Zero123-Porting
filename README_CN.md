@@ -1,5 +1,7 @@
 # ComfyUI 自定义节点 Zero-1-to-3: Zero-shot 单张图片全角度3D重绘
 
+[英文](README.md)
+
 这是一个非官方的 [Zero123:https://zero123.cs.columbia.edu/](https://zero123.cs.columbia.edu/) 移植 ComfyUI 自定义节点。实现使用单张 RGB 图像改变物体视角。
 
 通过此移植，您可以在 ComfyUI 中生成 3D 旋转图像。

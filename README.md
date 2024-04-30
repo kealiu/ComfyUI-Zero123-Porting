@@ -1,5 +1,7 @@
 # ComfyUI Node for Zero-1-to-3: Zero-shot One Image to 3D Object
 
+[中文](README_CN.md)
+
 This is an unofficial porting of [Zero123:https://zero123.cs.columbia.edu/](https://zero123.cs.columbia.edu/) for ComfyUI, Zero123 is a framework for changing the camera viewpoint of an object given just a single RGB image.
 
 This porting enable you generate 3D rotated image in ComfyUI.
