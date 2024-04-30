@@ -1,0 +1,14 @@
+{    
+    "custom_nodes": [
+        {
+            "author": "kealiu",
+            "title": "ComfyUI-Zero123-Porting",
+            "reference": "https://github.com/kealiu/ComfyUI-Zero123-Porting",
+            "files": [
+                "https://github.com/kealiu/ComfyUI-Zero123-Porting"
+            ],
+            "install_type": "git-clone",
+            "description": "Zero-1-to-3: Zero-shot One Image to 3D Object, unofficial porting of original [Zero123](https://github.com/cvlab-columbia/zero123)"
+        }
+    ]
+}
