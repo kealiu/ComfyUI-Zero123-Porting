@@ -24,29 +24,29 @@ After install this node, download the [sample workflow](sample/simple_workflow.j
 
 ### INPUT
 
-- image: input image, should be an `square` image, and an `object` with `white backgroup`.
-- polar_angle: angle of `x` axis, turn up or down
+- *image*: input image, should be an `square` image, and an `object` with `white backgroup`.
+- *polar_angle*: angle of `x` axis, turn up or down
     - `<0.0`: turn up
     - `>0.0`: turn down
-- azimuth_angle: angle of `y` axis, turn left or right
+- *azimuth_angle*: angle of `y` axis, turn left or right
     - `<0.0`: turn left
     - `>0.0`: turn right
-- scale: `z` axis, `far away` or `near`;  
+- *scale*: `z` axis, `far away` or `near`;  
     - `>1.0` : means bigger, or `near`;
     - `0<1<1.0` : means smaller, or `far away`
     - `1.0` : mean no change
-- steps: `75` is the default value by original `zero123` repo, do not smaller then `75`.
-- batch_size: how many images you do like to generated. 
-- fp16: whether to load model in `fp16`. enable it can speed up and save GPU mem.
-- checkpoint: the model you select, `zero123-xl` is the lates one.
-- height: output height, fix to 256, information only
-- width: output width, fix to 256, information only
-- sampler: cannot change, information only
-- scheduler: cannot change, information only
+- *steps*: `75` is the default value by original `zero123` repo, do not smaller then `75`.
+- *batch_size*: how many images you do like to generated. 
+- *fp16*: whether to load model in `fp16`. enable it can speed up and save GPU mem.
+- *checkpoint*: the model you select, `zero123-xl` is the lates one.
+- *height*: output height, fix to 256, information only
+- *width*: output width, fix to 256, information only
+- *sampler*: cannot change, information only
+- *scheduler*: cannot change, information only
 
 ### OUTPUT
 
-- images: the output images
+- *images*: the output images
 
 ## Node and Workflow
 
