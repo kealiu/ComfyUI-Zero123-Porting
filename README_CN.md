@@ -14,6 +14,10 @@
 
 有任何问题或者建议，欢迎在[issue](https://github.com/kealiu/ComfyUI-Zero123-Porting/issues)中反馈。
 
+## 节点和工作流
+
+![simple workflow](images/Zero123-Simple.png)
+
 ## 前提条件
 
 - 输入图像 `image` 必须是 `正方形` (宽=高)，否则将强制自动转换
@@ -26,33 +30,29 @@
 
 ### 输入
 
-- *image*: 输入图像，应为`正方形`图像，且为具有`白色背景`的`物体`。
-- *polar_angle*: `X` 轴的旋转角度，向上或向下转动
-    - `<0.0`: 向上转动
-    - `>0.0`: 向下转动
-- *azimuth_angle*: `Y` 轴的旋转角度，向左或向右转动
-    - `<0.0`: 向左转动
-    - `>0.0`: 向右转动
-- *scale*: `Z` 轴，`远`或`近`
+- **_image_** : 输入图像，应为`正方形`图像，且为具有`白色背景`的`物体`。
+- **_polar_angle_** : `X` 轴的旋转角度，向上或向下转动
+    - `<0.0` : 向上转动
+    - `>0.0` : 向下转动
+- **_azimuth_angle_** : `Y` 轴的旋转角度，向左或向右转动
+    - `<0.0` : 向左转动
+    - `>0.0` : 向右转动
+- **_scale_** : `Z` 轴，`远`或`近`
     - `>1.0` : 更大、更近
     - `0<1<1.0`: 更小、更远
     - `1.0` : 不变
-- *steps*: 使用原始 `zero123` 代码库中的默认值 `75`，建议不小于 `75`
-- *batch_size*: 想要生成的图像数量
-- *fp16*: 是否以 `fp16` 加载模型。启用可以加速并节省 GPU 显存
-- *checkpoint*: 选择模型，`zero123-xl` 是当前最新的模型.
-- *height*: 输出高度，固定为 256 不可变
-- *width*: 输出宽度，固定为 256 不可变
-- *sampler*: 固定不可变
-- *scheduler*: 固定不可变
+- **_steps_** : 使用原始 `zero123` 代码库中的默认值 `75`，建议不小于 `75`
+- **_batch_size_** : 想要生成的图像数量
+- **_fp16_** : 是否以 `fp16` 加载模型。启用可以加速并节省 GPU 显存
+- **_checkpoint_** : 选择模型，`zero123-xl` 是当前最新的模型. `stable-zero123` 效果可能更好但商业需要许可。
+- **_height_** : 输出高度，固定为 256 不可变
+- **_width_** : 输出宽度，固定为 256 不可变
+- **_sampler_** : 固定不可变
+- **_scheduler_** : 固定不可变
 
 ### 输出
 
-- *images*: 输出图像
-
-## 节点和工作流
-
-![simple workflow](images/Zero123-Simple.png)
+- **_images_** : 输出图像
 
 ## 提示
 
@@ -71,7 +71,7 @@
 
 ### Models
 
-搜索 `zero123`， 安装想要的模型。推荐 `zero123-xl.ckpt`.
+搜索 `zero123`， 安装想要的模型。推荐 `zero123-xl.ckpt` 或 `stable-zero123` (商用需要许可)
 
 ## 手工安装
 
@@ -92,7 +92,7 @@ pip install -r requirements.txt
 
 # Thanks to
 
-[Zero-1-to-3: Zero-shot One Image to 3D Object](https://github.com/cvlab-columbia/zero123)
+[Zero-1-to-3: Zero-shot One Image to 3D Object](https://github.com/cvlab-columbia/zero123)，一款能够在diffusion模型中学习到相机视角控制机制的框架。
 
 ```
 @misc{liu2023zero1to3,

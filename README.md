@@ -14,6 +14,10 @@ After install this node, download the [sample workflow](sample/simple_workflow.j
 
 If you have any questions or suggestions, please don't hesitate to leave them in the [issue tracker](https://github.com/kealiu/ComfyUI-Zero123-Porting/issues).
 
+## Node and Workflow
+
+![simple workflow](images/Zero123-Simple.png)
+
 ## PREREQUISITES
 
 - INPUT `image` must `square` (width=height), otherwise, this node will automatically trans it forcely
@@ -26,33 +30,29 @@ If you have any questions or suggestions, please don't hesitate to leave them in
 
 ### INPUT
 
-- *image*: input image, should be an `square` image, and an `object` with `white backgroup`.
-- *polar_angle*: angle of `x` axis, turn up or down
+- **_image_** : input image, should be an `square` image, and an `object` with `white backgroup`.
+- **_polar_angle_** : angle of `x` axis, turn up or down
     - `<0.0`: turn up
     - `>0.0`: turn down
-- *azimuth_angle*: angle of `y` axis, turn left or right
+- **_azimuth_angle_** : angle of `y` axis, turn left or right
     - `<0.0`: turn left
     - `>0.0`: turn right
-- *scale*: `z` axis, `far away` or `near`;  
+- **_scale_** : `z` axis, `far away` or `near`;  
     - `>1.0` : means bigger, or `near`;
     - `0<1<1.0` : means smaller, or `far away`
     - `1.0` : mean no change
-- *steps*: `75` is the default value by original `zero123` repo, do not smaller then `75`.
-- *batch_size*: how many images you do like to generated. 
-- *fp16*: whether to load model in `fp16`. enable it can speed up and save GPU mem.
-- *checkpoint*: the model you select, `zero123-xl` is the lates one.
-- *height*: output height, fix to 256, information only
-- *width*: output width, fix to 256, information only
-- *sampler*: cannot change, information only
-- *scheduler*: cannot change, information only
+- **_steps_** : `75` is the default value by original `zero123` repo, do not smaller then `75`.
+- **_batch_size_** : how many images you do like to generated. 
+- **_fp16_** : whether to load model in `fp16`. enable it can speed up and save GPU mem.
+- **_checkpoint_** : the model you select, `zero123-xl` is the lates one, and `stable-zero123`claim to be the best, but licences required for commercially use.
+- **_height_** : output height, fix to 256, information only
+- **_width_** : output width, fix to 256, information only
+- **_sampler_** : cannot change, information only
+- **_scheduler_** : cannot change, information only
 
 ### OUTPUT
 
-- *images*: the output images
-
-## Node and Workflow
-
-![simple workflow](images/Zero123-Simple.png)
+- **_images_** : the output images
 
 ## Tips
 
@@ -71,7 +71,7 @@ search `zero123` and select this repo, install it.
 
 ### Models
 
-search `zero123` and install the model you like. `zero123-xl.ckpt` is the latest one.
+search `zero123` and install the model you like, such as `zero123-xl.ckpt` and `stable-zero123` (licences required for commercially).
 
 ## Manually Installation
 
@@ -92,7 +92,7 @@ check out [`model-list.json`](model-list.json) for modules download URL, their s
 
 # Thanks to
 
-[Zero-1-to-3: Zero-shot One Image to 3D Object](https://github.com/cvlab-columbia/zero123)
+[Zero-1-to-3: Zero-shot One Image to 3D Object](https://github.com/cvlab-columbia/zero123),  which be able to learn control mechanisms that manipulate the camera viewpoint in large-scale diffusion models
 
 ```
 @misc{liu2023zero1to3,
