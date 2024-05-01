@@ -2,7 +2,7 @@
 
 [英文](README.md)
 
-这是一个非官方的 [Zero123:https://zero123.cs.columbia.edu/](https://zero123.cs.columbia.edu/) 移植 ComfyUI 自定义节点。实现使用单张 RGB 图像改变物体视角。
+这是一个非官方的 [Zero123 https://zero123.cs.columbia.edu/](https://zero123.cs.columbia.edu/) 移植 ComfyUI 自定义节点。实现使用单张 RGB 图像改变物体视角。
 
 通过此移植，您可以在 ComfyUI 中生成 3D 旋转图像。
 
@@ -89,6 +89,12 @@ pip install -r requirements.txt
 ### 模型
 
 打开 [`model-list.json`](model-list.json) ，获取模块下载 URL，并下载到 **`ComfyUI/models/checkpoints/zero123/`**
+
+# Zero123 related works
+
+- `zero123` ： 原版 [zero123](https://zero123.cs.columbia.edu/), 也是本Repo来源版本。
+- `stable-zero123` ： [StableAI](https://stability.ai/) 版本， 宣称由更多、更好的数据，以及更优的算法训练而来。[开源模型]((https://huggingface.co/stabilityai/stable-zero123))但商用有限制。
+- `zero123++` ： [Sudo AI](https://sudo.ai) 版本。 [同样开源了模型](https://github.com/SUDO-AI-3D/zero123plus)，但模型固定输出6张固定角度的图像。
 
 # Thanks to
 

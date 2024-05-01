@@ -2,7 +2,7 @@
 
 [中文](README_CN.md)
 
-This is an unofficial porting of [Zero123:https://zero123.cs.columbia.edu/](https://zero123.cs.columbia.edu/) for ComfyUI, Zero123 is a framework for changing the camera viewpoint of an object given just a single RGB image.
+This is an unofficial porting of [Zero123 https://zero123.cs.columbia.edu/](https://zero123.cs.columbia.edu/) for ComfyUI, Zero123 is a framework for changing the camera viewpoint of an object given just a single RGB image.
 
 This porting enable you generate 3D rotated image in ComfyUI.
 
@@ -89,6 +89,13 @@ And then, restart `ComfyUI`, and refresh your browser.
 ### Models
 
 check out [`model-list.json`](model-list.json) for modules download URL, their should be place under **`ComfyUI/models/checkpoints/zero123/`**
+
+
+# Zero123 related works
+
+- `zero123` by [zero123](https://zero123.cs.columbia.edu/), the original one. This repo porting from this one.
+- `stable-zero123` by [StableAI](https://stability.ai/), which train [models](https://huggingface.co/stabilityai/stable-zero123) with more data and claim to have better output.
+- `zero123++` by [Sudo AI](https://sudo.ai), which [opensource a model](https://github.com/SUDO-AI-3D/zero123plus) that always gen image with fix angles.
 
 # Thanks to
 
