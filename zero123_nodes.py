@@ -4,22 +4,35 @@ import numpy as np
 from PIL import Image
 from zero123 import init_model, predict_cam
 
-_GPU_INDEX = 0
+#_GPU_INDEX = 0
 
-def run_once(f):
-    def wrapper(*args, **kwargs):
-        if not wrapper.has_run:
-            wrapper.has_run = True
-            wrapper.ret = f(*args, **kwargs)
-        return wrapper.ret
-    wrapper.has_run = False
-    return wrapper
-
-@run_once
+g_model = None
+g_ckpt = None
+g_device = None
+g_hf = None
 def load_model(checkpoint, hf=True):
-    device = f"cuda:{_GPU_INDEX}" if torch.cuda.is_available() else "cpu"
-    print()
-    return (init_model(device, checkpoint, half_precision=hf), device)
+    global g_model
+    global g_ckpt
+    global g_device
+    global g_hf
+    if (g_ckpt == checkpoint) and (g_hf == hf) and g_model:
+        return (g_model, g_device)
+    # not init or ckpt changed
+    if g_model:
+        del g_model # may need reload model
+        g_model = None
+        torch.cuda.empty_cache()
+
+    if not g_device:
+        g_device = 'cpu'
+        if torch.cuda.is_available():
+            gpu = torch.cuda.current_device()
+            if gpu >= 0:
+                g_device = f'cuda:{gpu}'
+    g_model = init_model(g_device, checkpoint, half_precision=hf)
+    g_ckpt = checkpoint
+    g_hf = hf
+    return (g_model, g_device)
 
 class Zero123:
     @classmethod
