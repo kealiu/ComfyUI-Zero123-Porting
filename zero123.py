@@ -3,14 +3,12 @@ import sys
 import numpy as np
 import torch
 from contextlib import nullcontext
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
 from einops import rearrange
 from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
 from omegaconf import OmegaConf
 from PIL import Image
 from rich import print
-from transformers import CLIPImageProcessor
 from torch import autocast
 from torchvision import transforms
 
@@ -43,12 +41,10 @@ def init_model(device, ckpt, half_precision=False):
     config = OmegaConf.load(config)
 
     # Instantiate all models beforehand for efficiency.
-    print('Instantiating LatentDiffusion...')
     if half_precision:
         model = torch.compile(load_model_from_config(config, ckpt, device=device)).half()
     else:
         model = torch.compile(load_model_from_config(config, ckpt, device=device))
-    #models['clip_fe'] = CLIPImageProcessor.from_pretrained(clip_vision)
 
     return model
 
@@ -85,8 +81,6 @@ def sample_model_batch(model, sampler, input_im, xs, ys, n_samples=4, precision=
                                              unconditional_conditioning=uc,
                                              eta=ddim_eta,
                                              x_T=None)
-            # print(samples_ddim.shape)
-            # samples_ddim = torch.nn.functional.interpolate(samples_ddim, 64, mode='nearest', antialias=False)
             x_samples_ddim = model.decode_first_stage(samples_ddim)
             ret_imgs = torch.clamp((x_samples_ddim + 1.0) / 2.0, min=0.0, max=1.0).cpu()
             del cond, c, x_samples_ddim, samples_ddim, uc, input_im
@@ -95,20 +89,10 @@ def sample_model_batch(model, sampler, input_im, xs, ys, n_samples=4, precision=
 
 @torch.no_grad()
 def predict_cam(model, imnp, xs, ys, device="cuda", n_samples=1, ddim_steps=75, scale=3.0):
-    # raw_im = raw_im.resize([256, 256], Image.LANCZOS)
-    # input_im_init = preprocess_image(models, raw_im, preprocess=False)
     input_im = transforms.ToTensor()(imnp).unsqueeze(0).to(device)
     input_im = input_im * 2 - 1
 
     sampler = DDIMSampler(model)
-    #ksampler("euler", inpaint_options={"random": True})
-    #sampler = sampler_object("ddim")(model)
-    # sampler.to(device)
-    print("input_im", input_im)
-    print("xs", xs)
-    print("ys", ys)
-    print("n_samples", n_samples)
-    print("scale", scale)
     sampleimg = sample_model_batch(model, sampler, input_im, xs, ys, n_samples=n_samples, ddim_steps=ddim_steps, scale=scale)
 
     out_images = []
