@@ -22,7 +22,7 @@
 
 ### 节点 `Zero123: Image Preprocess`
 
-![simple image process](images/image_preprocess)
+![simple image process](images/image_preprocess.png)
 
 ## 前提条件
 

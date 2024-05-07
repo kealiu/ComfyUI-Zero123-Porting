@@ -22,7 +22,7 @@ If you have any questions or suggestions, please don't hesitate to leave them in
 
 ### Node `Zero123: Image Preprocess`
 
-![simple image process](images/image_preprocess)
+![simple image process](images/image_preprocess.png)
 
 ## PREREQUISITES
 
