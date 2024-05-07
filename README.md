@@ -16,17 +16,23 @@ If you have any questions or suggestions, please don't hesitate to leave them in
 
 ## Node and Workflow
 
+### Node `Zero123: Image Rotate in 3D`
+
 ![simple workflow](images/Zero123-Simple.png)
+
+### Node `Zero123: Image Preprocess`
+
+![simple image process](images/image_preprocess)
 
 ## PREREQUISITES
 
-- INPUT `image` must `square` (width=height), otherwise, this node will automatically trans it forcely
-- INPUT `image` should be an `object` with **white background**, which means you need preprocess of image.
+- INPUT `image` must `square` (width=height), otherwise, this node will automatically trans it forcely.
+- INPUT `image` should be an `object` with **white background**, which means you need preprocess of image (use `Zero123: Image Preprocess).
 - OUTPUT `image` only support `256x256` (fixed) currently, you can upscale it later.
 
 # Explains
 
-## Input and Output
+## Node `Zero123: Image Rotate in 3D` Input and Output
 
 ### INPUT
 
@@ -53,6 +59,17 @@ If you have any questions or suggestions, please don't hesitate to leave them in
 ### OUTPUT
 
 - **_images_** : the output images
+
+## Node `Zero123: Image Preprocess` Input and Output
+
+### INPUT
+
+- **_image_** : the original input `image`.
+- **_mask_** : the `mask` of the `image`.
+
+### OUTPUT
+
+- **_image_** : the processed `white background`, and `square` version input `image` with subject in center.
 
 ## Tips
 

@@ -16,17 +16,23 @@
 
 ## 节点和工作流
 
+### 节点 `Zero123: Image Rotate in 3D`
+
 ![simple workflow](images/Zero123-Simple.png)
+
+### 节点 `Zero123: Image Preprocess`
+
+![simple image process](images/image_preprocess)
 
 ## 前提条件
 
 - 输入图像 `image` 必须是 `正方形` (宽=高)，否则将强制自动转换
-- 输入图像 `image` 应该是一个具有 **`白色背景`** 的`物体`，请自行预处理图像。
+- 输入图像 `image` 应该是一个具有 **`白色背景`** 的`物体`，可使用 `Zero123: Image Preprocess` 预处理图像。
 - 输出图像 `image` 目前仅支持 `256x256` (固定)，可后期放大。
 
 # 说明
 
-## 参数输入与输出结果
+## 节点 `Zero123: Image Rotate in 3D` 参数输入与输出结果
 
 ### 输入
 
@@ -53,6 +59,17 @@
 ### 输出
 
 - **_images_** : 输出图像
+
+## 节点 `Zero123: Image Preprocess` 参数输入与输出结果
+
+### 输入
+
+- **_image_** : 原始输入`图像`.
+- **_mask_** : 原始输入`图像`对应的`遮罩(Mask)`.
+
+### 输出
+
+- **_image_** : 处理后的 `白底`、`方型` 、主体居中的 `图像`.
 
 ## 提示
 

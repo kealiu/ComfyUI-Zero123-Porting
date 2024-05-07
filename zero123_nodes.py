@@ -4,7 +4,9 @@ import numpy as np
 from PIL import Image
 from zero123 import init_model, predict_cam
 
-#_GPU_INDEX = 0
+from comfy import model_management
+
+from util_preprocess import mask2bbox, composite_new_image, generate_pure_image
 
 g_model = None
 g_ckpt = None
@@ -24,15 +26,48 @@ def load_model(checkpoint, hf=True):
         torch.cuda.empty_cache()
 
     if not g_device:
-        g_device = 'cpu'
-        if torch.cuda.is_available():
+        g_device = model_management.get_torch_device()
+        if (not g_device) and torch.cuda.is_available():
             gpu = torch.cuda.current_device()
             if gpu >= 0:
                 g_device = f'cuda:{gpu}'
+            else:
+                g_device = 'cpu'
     g_model = init_model(g_device, checkpoint, half_precision=hf)
     g_ckpt = checkpoint
     g_hf = hf
     return (g_model, g_device)
+
+class Zero123Preprocess:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": { 
+                "image": ("IMAGE",), 
+                "mask": ("MASK",)
+            }
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    OUTPUT_IS_LIST = (False, )
+    FUNCTION = "zero123_proprecess"
+    CATEGORY = "image"
+    
+    def zero123_proprecess(self, image, mask):
+        # generate new image 
+        ox, oy, h, w, nl = mask2bbox(mask[0])
+        if nl <= 0:
+            print("NO object find / MASK is empty")
+            return None
+
+        bb_image = image[0][int(oy):int(oy+nl),int(ox):int(ox+nl), :].unsqueeze(0)
+        bb_mask = mask[0][int(oy):int(oy+nl),int(ox):int(ox+nl)]
+        if bb_image.shape[3] == 3: # RGB
+            alpha = torch.ones(1, nl, nl, 1)
+            bb_image = torch.cat((bb_image, alpha), 3)
+
+        pure_image = generate_pure_image(nl, nl, color=0xffffff)[0]
+        return composite_new_image(pure_image, bb_image, 0, 0, False, mask = bb_mask)
 
 class Zero123:
     @classmethod
