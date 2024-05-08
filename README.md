@@ -66,6 +66,7 @@ If you have any questions or suggestions, please don't hesitate to leave them in
 
 - **_image_** : the original input `image`.
 - **_mask_** : the `mask` of the `image`.
+- **_margin_** : the `percentage(%)` margin of output image. 
 
 ### OUTPUT
 

@@ -30,8 +30,11 @@ def mask2bbox(mask: torch.Tensor):
 
     non_zero_indices = np.nonzero(alpha_channel)
 
-    min_x, max_x = np.min(non_zero_indices[1]), np.max(non_zero_indices[1])
-    min_y, max_y = np.min(non_zero_indices[0]), np.max(non_zero_indices[0])
+    try:
+        min_x, max_x = np.min(non_zero_indices[1]), np.max(non_zero_indices[1])
+        min_y, max_y = np.min(non_zero_indices[0]), np.max(non_zero_indices[0])
+    except:
+        return (-1, -1, -1, -1, -1)
  
     h = max_y - min_y
     w = max_x - min_x

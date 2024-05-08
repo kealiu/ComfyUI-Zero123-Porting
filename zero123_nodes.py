@@ -1,4 +1,5 @@
 import torch
+import math
 import folder_paths
 import numpy as np
 from PIL import Image
@@ -44,7 +45,8 @@ class Zero123Preprocess:
         return {
             "required": { 
                 "image": ("IMAGE",), 
-                "mask": ("MASK",)
+                "mask": ("MASK",),
+                "margin": ("FLOAT", { "default": 0.05, "min": 0.01, "max": 1.0, "step": 0.01})
             }
         }
 
@@ -53,11 +55,12 @@ class Zero123Preprocess:
     FUNCTION = "zero123_proprecess"
     CATEGORY = "image"
     
-    def zero123_proprecess(self, image, mask):
+    def zero123_proprecess(self, image, mask, margin):
         # generate new image 
         ox, oy, h, w, nl = mask2bbox(mask[0])
         if nl <= 0:
-            print("NO object find / MASK is empty")
+            print("!!!ERROR: Empty Mask, no subject found! Please Check it")
+            raise ValueError("!!!ERROR: Empty Mask, no subject found! Please Check it")
             return None
 
         bb_image = image[0][int(oy):int(oy+nl),int(ox):int(ox+nl), :].unsqueeze(0)
@@ -66,8 +69,10 @@ class Zero123Preprocess:
             alpha = torch.ones(1, nl, nl, 1)
             bb_image = torch.cat((bb_image, alpha), 3)
 
-        pure_image = generate_pure_image(nl, nl, color=0xffffff)[0]
-        return composite_new_image(pure_image, bb_image, 0, 0, False, mask = bb_mask)
+        margin_nl = math.floor(nl*margin)+1
+        pure_image = generate_pure_image(nl+margin_nl*2, nl+margin_nl*2, color=0xffffff)[0]
+        return composite_new_image(pure_image, bb_image, margin_nl, margin_nl, False, mask = bb_mask)
+        
 
 class Zero123:
     @classmethod
@@ -102,9 +107,13 @@ class Zero123:
     def moveCam(self, image, polar_angle, azimuth_angle, scale, steps, batch_size, fp16, checkpoint, *args, **kwargs):
         xs = [polar_angle]*batch_size
         ys = [azimuth_angle]*batch_size
+        
         model, device = load_model(folder_paths.get_full_path("checkpoints", checkpoint), hf=fp16)
 
         # just for simplify
+        if image.shape[3] > 3:
+            image = image[:, :, :, :3]
+
         input_im = Image.fromarray((255. * image[0]).numpy().astype(np.uint8))
         w, h = input_im.size
         if (w != 256) or (h != 256):
