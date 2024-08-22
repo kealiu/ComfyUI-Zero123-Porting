@@ -25,7 +25,6 @@ certifi==2024.2.2
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
-clip==1.0
 colorama==0.4.6
 coloredlogs==15.0.1
 comm==0.2.2
@@ -258,3 +257,4 @@ xyzservices==2024.4.0
 yacs==0.1.8
 yarl==1.9.4
 zipp==3.18.1
+openai-clip==1.0.1
